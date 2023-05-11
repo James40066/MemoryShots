@@ -35,13 +35,13 @@ public class SigninController {
     @GetMapping("/signIn")
     public String signIn(){
         //登入頁
-        return "signin.html";
+        return "signin";
     }
 
     @GetMapping("/signUp")
     public String signUp(){
         //註冊頁
-        return "signup.html";
+        return "signup";
     }
 
     @PostMapping("/doSignIn")
@@ -73,6 +73,15 @@ public class SigninController {
         }
     }
 
+    @GetMapping("/doLogOut")
+    public String doLogOut(HttpSession session) throws Exception {
+
+        if(session.getAttribute("member") != null){
+            session.removeAttribute("member");
+        }
+
+        return "redirect:/MemoryShots/signIn";
+    }
 
 
 

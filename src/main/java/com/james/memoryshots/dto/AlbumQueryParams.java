@@ -1,30 +1,20 @@
 package com.james.memoryshots.dto;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.Date;
-@Entity
-@Table(name = "album")
-public class Album {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "album_id")
+public class AlbumQueryParams {
+
     int albumId;
 
-    @NotNull
-    @Column(name = "member_id")
     String memberId;
 
-    @NotNull
-    @Column(name = "album_name")
     String albumName;
 
-    @Column(name = "album_desc")
     String albumDesc;
 
-    @NotNull
-    @Column(name = "creat_date")
-    Date creatDate;
+    String search;
+
+    int limit;
+
+    int offset;
 
     public int getAlbumId() {
         return albumId;
@@ -58,11 +48,27 @@ public class Album {
         this.albumDesc = albumDesc;
     }
 
-    public Date getCreatDate() {
-        return creatDate;
+    public String getSearch() {
+        return search;
     }
 
-    public void setCreatDate(Date creatDate) {
-        this.creatDate = creatDate;
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public void setLimit(int limit) {
+        this.limit = limit;
+    }
+
+    public int getOffset() {
+        return offset;
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 }

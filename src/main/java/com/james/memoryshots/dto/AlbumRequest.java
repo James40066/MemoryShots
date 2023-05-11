@@ -5,24 +5,23 @@ import javax.validation.constraints.NotNull;
 
 public class AlbumRequest {
     @NotNull
-    @Email
-    String album_name;
+    String albumName;
 
-    String album_desc;
+    String albumDesc;
 
-    public String getAlbum_name() {
-        return album_name;
+    public String getAlbumName() {
+        return albumName;
     }
 
-    public void setAlbum_name(String album_name) {
-        this.album_name = album_name;
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
     }
 
-    public String getAlbum_desc() {
-        return album_desc;
+    public String getAlbumDesc() {
+        return albumDesc;
     }
 
-    public void setAlbum_desc(String album_desc) {
-        this.album_desc = album_desc;
+    public void setAlbumDesc(String albumDesc) {
+        this.albumDesc = albumDesc;
     }
 }

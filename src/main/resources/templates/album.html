@@ -33,6 +33,11 @@
     <link th:href="@{/static/dist/simple-lightbox.css}" rel="stylesheet" href="../static/dist/simple-lightbox.css?v2.13.0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
+    <!--vue.js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!--axios-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -45,7 +50,6 @@
         </div>
         <!-- Spinner End -->
 
-
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
@@ -56,14 +60,14 @@
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">
-                            <a href="ph.html" class="dropdown-item active">photo</a>
+                            <a href="/MemoryShots_main/" class="dropdown-item">album</a>
+                            <a href="/MemoryShots_main/" class="dropdown-item">member info</a>
                         </div>
                     </div>
                 </div>
             </nav>
         </div>
         <!-- Sidebar End -->
-
 
         <!-- Content Start -->
         <div class="content">
@@ -76,120 +80,87 @@
                     <i class="fa fa-bars text-primary"></i>
                 </a>
                 <form class="d-none d-md-flex ms-4">
-                    <input class="form-control bg-dark border-0" type="search" placeholder="Search">
+                    <!--vueModel-->
+                    <div id="search_input">
+                        <input class="form-control bg-dark border-0" type="search" placeholder="Search" v-model="searchValue" @input="doSearch">
+                    </div>
+                    <!--vueModel-->
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="../static/img/0001.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">kanahei</span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
-                            <a href="signin.html" class="dropdown-item">Log Out</a>
+                        <!--vueModel-->
+                        <div id = "member_info">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                <img class="rounded-circle me-lg-2" src="../static/img/0001.jpg" alt="" style="width: 40px; height: 40px;">
+                                <span class="d-none d-lg-inline-flex" style="color: white;">{{member_Name}}</span>
+                                <input id="member_id" type="hidden"  v-model="member_id">
+                                <input id="member_Name" type="hidden"  v-model="member_Name">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0">
+                                <a href="/MemoryShots/doLogOut" class="dropdown-item">Log Out</a>
+                            </div>
                         </div>
+                        <!--vueModel-->
                     </div>
                 </div>
             </nav>
             <!-- Navbar End -->
 
-
             <!-- Blank Start -->
             <div class="container-fluid py-4 px-4">
                 <div class="row bg-secondary rounded justify-content-center mx-0" style="min-height: 85vh !important;">
-
-                    <div class="text-center py-4 px-4">
-                        <table class="table table-light">
-                            <thead>
-                              <tr>
-                                <th scope="col">序號</th>
-                                <th scope="col">相簿名稱</th>
-                                <th scope="col">備註</th>
-                                <th scope="col">創立時間</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                              </tr>
-
-                              <tr>
-                                  <th scope="row">2</th>
-                                  <td>Jacob</td>
-                                  <td>Thornton</td>
-                                  <td>@fat</td>
-                              </tr>
-                              <tr>
-                                  <th scope="row">2</th>
-                                  <td>Jacob</td>
-                                  <td>Thornton</td>
-                                  <td>@fat</td>
-                              </tr>
-                              <tr>
-                                  <th scope="row">2</th>
-                                  <td>Jacob</td>
-                                  <td>Thornton</td>
-                                  <td>@fat</td>
-                              </tr>
-                              <tr>
-                                  <th scope="row">2</th>
-                                  <td>Jacob</td>
-                                  <td>Thornton</td>
-                                  <td>@fat</td>
-                              </tr>
-                              <tr>
-                                  <th scope="row">2</th>
-                                  <td>Jacob</td>
-                                  <td>Thornton</td>
-                                  <td>@fat</td>
-                              </tr>
-                              <tr>
-                                  <th scope="row">2</th>
-                                  <td>Jacob</td>
-                                  <td>Thornton</td>
-                                  <td>@fat</td>
-                              </tr>
-
-                              <tr>
-                                <th scope="row">10</th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                              </tr>
-                            </tbody>
-                        </table>
-                     </div>
-
-                    <div class="bg-secondary rounded h-100 p-4">
-                        <div class="btn-toolbar" role="toolbar" style="justify-content: center;">
-                            <div class="btn-group me-2" role="group" aria-label="First group">
-                                <button type="button" class="btn btn-primary">1</button>
-                                <button type="button" class="btn btn-secondary">2</button>
-                                <button type="button" class="btn btn-secondary">3</button>
-                                <button type="button" class="btn btn-secondary">4</button>
-                                <button type="button" class="btn btn-secondary">5</button>
-                                <button type="button" class="btn btn-secondary">6</button>
-                                <button type="button" class="btn btn-secondary">7</button>
-                            </div>
-
+                    <!--vueModel-->
+                    <div id="table_data">
+                        <!--table-->
+                        <div class="text-center py-4 px-4">
+                            <table class="table table-light">
+                                <thead>
+                                <tr>
+                                    <th scope="col">序號</th>
+                                    <th scope="col">相簿名稱</th>
+                                    <th scope="col">備註</th>
+                                    <th scope="col">創立時間</th>
+                                    <th scope="col">功能</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="(item, index) in jsonData" :key="item.albumId">
+                                    <td>{{index + 1 }}</td>
+                                    <td><a href="#">{{item.albumName | truncate(10)}}</a></td>
+                                    <td>{{item.albumDesc | truncate(10)}}</td>
+                                    <td>{{item.creatDate}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary btn-sm" @click="editAlbum(item)" data-bs-toggle="modal" data-bs-target="#updateModal">修改</button>
+                                        <button type="button" class="btn btn-warning btn-sm" @click="delAlbum(item.albumId)">刪除</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
+                        <!--table-->
+                        <!--PageButtom-->
+                        <div class="bg-secondary rounded p-4">
+                            <div class="btn-toolbar" role="toolbar" style="justify-content: center;">
+                                <div class="btn-group me-2" role="group" aria-label="First group">
+                                    <button type="button" class="btn bts" @click="callAjax(page)"
+                                            v-for=" page in totalPages" :key="page"
+                                            :class="{ 'btn-secondary': currentPage === page ,'btn-primary': currentPage !== page}">
+                                        {{ page }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <!--PageButtom-->
 
+                    </div>
+                    <!--vueModel-->
                 </div>
             </div>
             <!-- Blank End -->
-
-
-
         </div>
         <!-- Content End -->
+
+        <!-- insert_model -->
         <label class="btn btn-lg btn-primary btn-lg-square back-to-top" >
             <input id="upload_img" style="display:none;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
             <i class="bi bi-bookmark-plus" data-bs-toggle="tooltip" data-bs-placement="top" title="新增相簿"></i>
@@ -202,33 +173,73 @@
                   <h5 class="modal-title" id="exampleModalLabel">新增相簿</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="album_name"
-                               placeholder="相簿名稱">
-                        <label for="album_name">相簿名稱</label>
-                    </div>
-                    <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here"
-                                          id="floatingTextarea" style="height: 150px;"></textarea>
-                        <label for="floatingTextarea">備註</label>
-                    </div>
+                <!--vueModel-->
+                <div id = "new_album">
+                    <form>
+                        <div class="modal-body">
+                            <div class="form-floating mb-3">
+                                <p id="alert" style="color: red;">{{alert}}</p>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="album_name"
+                                       placeholder="相簿名稱" style="color: white;"  v-model="album_name">
+                                <label for="album_name">相簿名稱</label>
+                            </div>
+                            <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a comment here"
+                                              id="album_desc" style="height: 150px;color: white;"  v-model="album_desc"></textarea>
+                                <label for="album_desc">備註</label>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="model_close">關閉</button>
+                            <button type="button" class="btn btn-warning" v-on:click="submit">新增</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                  <button type="button" class="btn btn-warning">新增</button>
-                </div>
+                <!--vueModel-->
               </div>
             </div>
         </div>
+        <!-- insert_model -->
 
-        <!-- <button type="file" id="formFile" class="btn btn-lg btn-primary btn-lg-square back-to-top"></button>
-        <button type="file" id="formFile" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-box-arrow-in-up"></i></button> -->
-
-
-
-
-
+        <!-- update_model -->
+        <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color: #b2c9c6;">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateModallLabel">修改相簿</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!--vueModel-->
+                    <div id = "update_album">
+                        <form>
+                            <div class="modal-body">
+                                <div class="form-floating mb-3">
+                                    <p id="alert2" style="color: red;">{{u_alert}}</p>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="album_name2"
+                                           placeholder="相簿名稱" style="color: white;"  v-model="u_album_name">
+                                    <label for="album_name">相簿名稱</label>
+                                </div>
+                                <div class="form-floating">
+                                                    <textarea class="form-control" placeholder="Leave a comment here"
+                                                              id="album_desc2" style="height: 150px;color: white;"  v-model="u_album_desc"></textarea>
+                                    <label for="album_desc">備註</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="model_close2">關閉</button>
+                                <button type="button" class="btn btn-warning" v-on:click="update">修改</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!--vueModel-->
+                </div>
+            </div>
+        </div>
+        <!-- update_model -->
     </div>
 
     <!-- JavaScript Libraries -->
@@ -246,10 +257,199 @@
     <script th:href="@{/MemoryShots/static/js/main.js}" src="../static/js/main.js"></script>
 
     <script th:href="@{/MemoryShots/static/dist/simple-lightbox.js}" src="../static/dist/simple-lightbox.js?v2.13.0"></script>
-    <script>
+    <script th:inline="javascript">
+
         (function() {
             var $gallery = new SimpleLightbox('.gallery a', {});
         })();
+
+        //member_info_init
+        var search_input = new Vue({
+            el: '#search_input',
+            data:{
+                searchValue :''
+            },
+            methods: {
+                doSearch(){
+                    //console.log("searchValue=>" + this.searchValue)
+                    call_ajax(1);
+                }
+            }
+        })
+
+        //member_info_init
+        var member_info = new Vue({
+            el: '#member_info',
+            data:{
+                member_id : [[${member_id}]],
+                member_Name : [[${member_Name}]]
+            }
+        })
+
+        var table = new Vue({
+            el: '#table_data',
+            data:{
+                jsonData: [],
+                totalPages : 0, // 總頁數
+                currentPage : 1, // 目前頁數
+                offset : 0,
+                limit : 10, // 每頁筆數
+                total : 0 // 總資料筆數
+            },
+            methods: {
+                callAjax(page){
+                    //更新資料
+                    call_ajax(page);
+                    this.currentPage = page;
+                },
+                editAlbum(item){
+                    update_album.u_albumId = item.albumId;
+                    update_album.u_album_name = item.albumName;
+                    update_album.u_album_desc = item.albumDesc;
+                },
+                delAlbum(albumId){
+                    //刪除相簿
+                    if(confirm('是否刪除該相簿?')){
+                        del_album(albumId);
+                    }
+                }
+            },
+            filters: {
+                truncate(value, maxLength) {
+                    if (value.length > maxLength) {
+                        return value.slice(0, maxLength) + '...';
+                    }
+                    return value;
+                }
+            }
+        })
+
+        //new_album
+        var new_album = new Vue({
+            el: '#new_album',
+            data:{
+                album_name :'大阪自由行',
+                album_desc:'2023/03/02',
+                alert:''
+            },
+            methods: {
+                submit: function() {
+                    //console.log("album_name=>" + this.album_name);
+                    //console.log("album_desc=>" + this.album_desc);
+                    if(this.album_name == ""){
+                        this.alert = '相簿名稱不可為空白';
+                        $('#album_name').focus();
+                        return;
+                    }
+                    $('#alert').text('');
+                    axios.post('/MemoryShots_main/creat_album/' + member_info.member_id, {
+                        albumName: this.album_name,
+                        albumDesc: this.album_desc
+                    })
+                        .then(function (response) {
+                            //console.log(JSON.stringify(response));
+                            if(response.data == '新增成功'){
+                                alert("新增成功");
+                                $('#model_close').click();
+                                call_ajax(1);
+                            }else{
+                                alert("新增失敗");
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
+            }
+        })
+
+        //update_album
+        var update_album = new Vue({
+            el: '#update_album',
+            data:{
+                u_albumId :0,
+                u_album_name :'',
+                u_album_desc:'',
+                u_alert:''
+            },
+            methods: {
+                update: function() {
+                    if(this.u_album_name == ""){
+                        this.u_alert = '相簿名稱不可為空白';
+                        $('#album_name2').focus();
+                        return;
+                    }
+                    //console.log("u_albumId=>" + this.u_albumId);
+                    //console.log("u_album_name=>" + this.u_album_name);
+                    //console.log("u_album_desc=>" + this.u_album_desc);
+                    axios.put('/MemoryShots_main/update_album/' + this.u_albumId, {
+                        albumName: this.u_album_name,
+                        albumDesc: this.u_album_desc
+                    })
+                        .then(function (response) {
+                            //console.log(JSON.stringify(response));
+                            if(response.data == '更新成功'){
+                                alert("更新成功");
+                                $('#model_close2').click();
+                                call_ajax(1);
+                            }else{
+                                alert("更新失敗");
+                            }
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
+            }
+        })
+
+        function call_ajax(page){
+            var url = '/MemoryShots_main/find_album?memberId=' + member_info.member_id;
+
+            //offset
+            var offset = (page - 1) * 10;
+            url += '&offset=' + offset;
+
+            //search
+            if(search_input.searchValue != ""){
+                url += '&search=' + search_input.searchValue;
+            }
+
+            //console.log("url=>" + url);
+
+            axios.get(url)
+                .then(function (response) {
+                    //console.log(JSON.stringify(response));
+                    table.jsonData = response.data.results;
+                    table.limit = response.data.limit;
+                    table.offset = response.data.offset;
+                    table.total = response.data.total
+                    table.totalPages = Math.ceil(table.total / table.limit);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+        function del_album(albumId){
+            var url = '/MemoryShots_main/del_album/' + albumId;
+            //console.log("url=>" + url);
+            axios.get(url)
+                .then(function (response) {
+                    //console.log(JSON.stringify(response));
+                    call_ajax(1);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        }
+
+        function search(search_str){
+            console.log("search()");
+        }
+
+        call_ajax(1);
+
     </script>
 </body>
 

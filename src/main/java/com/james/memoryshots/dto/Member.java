@@ -7,11 +7,10 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "member")
 public class Member {
-
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    @Column(name = "member_id")
-   int member_id;
+   int memberId;
 
    @Column(name = "email")
    @NotNull
@@ -26,12 +25,12 @@ public class Member {
    @NotNull
    String name;
 
-   public int getMember_id() {
-      return member_id;
+   public int getMemberId() {
+      return memberId;
    }
 
-   public void setMember_id(int member_id) {
-      this.member_id = member_id;
+   public void setMemberId(int memberId) {
+      this.memberId = memberId;
    }
 
    public String getEmail() {

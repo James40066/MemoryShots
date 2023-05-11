@@ -33,8 +33,8 @@ public class SigninServiceImpl implements SigninServices {
             member.setPwd(passwordEncoder.encode(member.getPwd()));
 
             Member db_member = signinRepository.save(member);
-            Integer member_id = db_member.getMember_id();
-            log.warn("new_member_id=>" + member_id);
+            Integer memberId = db_member.getMemberId();
+            log.warn("new_member_id=>" + memberId);
         }else{
             status = false;
         }
@@ -42,10 +42,10 @@ public class SigninServiceImpl implements SigninServices {
     }
 
     @Override
-    public boolean update(Member member, Integer member_id) throws Exception {
+    public boolean update(Member member, Integer memberId) throws Exception {
         boolean status = true;
 
-        Member m = signinRepository.findById(member_id).orElse(null);
+        Member m = signinRepository.findById(memberId).orElse(null);
         if(m != null){
             m.setEmail(member.getEmail());
             m.setPwd(member.getPwd());
@@ -59,10 +59,10 @@ public class SigninServiceImpl implements SigninServices {
     }
 
     @Override
-    public boolean delete(Integer member_id) throws Exception {
+    public boolean delete(Integer memberId) throws Exception {
         boolean status = true;
-        signinRepository.deleteById(member_id);
-        Member m = signinRepository.findById(member_id).orElse(null);
+        signinRepository.deleteById(memberId);
+        Member m = signinRepository.findById(memberId).orElse(null);
 
         if(m != null){
             status = false;
@@ -72,9 +72,9 @@ public class SigninServiceImpl implements SigninServices {
     }
 
     @Override
-    public Member getMemberById(Integer member_id) throws Exception{
+    public Member getMemberById(Integer memberId) throws Exception{
 
-        Member member = signinRepository.findById(member_id).orElse(null);
+        Member member = signinRepository.findById(memberId).orElse(null);
 
         return member;
     }
