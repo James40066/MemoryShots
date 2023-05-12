@@ -3,7 +3,7 @@ package com.james.memoryshots.service.impl;
 import com.james.memoryshots.dto.Member;
 import com.james.memoryshots.dao.SigninRepository;
 import com.james.memoryshots.dto.MemberRequest;
-import com.james.memoryshots.service.SigninServices;
+import com.james.memoryshots.service.SigninService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class SigninServiceImpl implements SigninServices {
+public class SigninServiceImpl implements SigninService {
     @Autowired
     SigninRepository signinRepository;
 
@@ -48,7 +48,7 @@ public class SigninServiceImpl implements SigninServices {
         Member m = signinRepository.findById(memberId).orElse(null);
         if(m != null){
             m.setEmail(member.getEmail());
-            m.setPwd(member.getPwd());
+            m.setPwd(passwordEncoder.encode(member.getPwd()));
             m.setName(member.getName());
             signinRepository.save(m);
         }else{

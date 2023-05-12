@@ -3,7 +3,7 @@ package com.james.memoryshots.service;
 import com.james.memoryshots.dto.Member;
 import com.james.memoryshots.dto.MemberRequest;
 
-public interface SigninServices {
+public interface SigninService {
      boolean insert(Member member) throws Exception;
 
      boolean update(Member member,Integer memberId) throws Exception;

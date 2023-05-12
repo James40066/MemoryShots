@@ -2,7 +2,7 @@ package com.james.memoryshots.controller;
 
 import com.james.memoryshots.dto.Member;
 import com.james.memoryshots.dto.MemberRequest;
-import com.james.memoryshots.service.SigninServices;
+import com.james.memoryshots.service.SigninService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class SigninController {
     //http://localhost:8082/MemoryShots/
 
     @Autowired
-    SigninServices signinServices;
+    SigninService signinService;
 
     @GetMapping("/")
     public String index(){
@@ -52,7 +52,7 @@ public class SigninController {
         log.warn("EMAIL=>" + memberRequest.getEmail());
         log.warn("PWD=>" + memberRequest.getPwd());
 
-        Member member = signinServices.doLogin(memberRequest);
+        Member member = signinService.doLogin(memberRequest);
         if(member != null){
             session.setAttribute("member",member);
             return ResponseEntity.status(HttpStatus.OK).body("登入成功");
@@ -65,7 +65,7 @@ public class SigninController {
     public ResponseEntity<?> doSignUp(@RequestBody @Valid Member member) throws Exception {
         //http://localhost:8082/doSignUp
         //{"email":"a0953782057@gmail.com","pwd":"jay0519","name":"james40066"}
-        boolean status = signinServices.insert(member);
+        boolean status = signinService.insert(member);
         if(status){
             return ResponseEntity.status(HttpStatus.CREATED).body("註冊成功");
         }else{
