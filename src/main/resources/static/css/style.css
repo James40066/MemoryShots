@@ -296,7 +296,7 @@
 
 .gallery a img {
     float: left;
-    width: 25%;
+    width: 14%;
     height: auto;
     border: 6px solid #2e2e2e00;
     -webkit-transition: -webkit-transform .15s ease;

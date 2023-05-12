@@ -53,7 +53,7 @@
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <a href="#" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>MemoryShots</h3>
                 </a>
                 <div class="navbar-nav w-100">
@@ -112,7 +112,7 @@
                     <!--vueModel-->
                     <div id="table_data">
                         <!--table-->
-                        <div class="text-center py-4 px-4">
+                        <div class="text-center py-4 px-4" style="min-height: 70vh !important;">
                             <table class="table table-light">
                                 <thead>
                                 <tr>
@@ -126,7 +126,7 @@
                                 <tbody>
                                 <tr v-for="(item, index) in jsonData" :key="item.albumId">
                                     <td>{{index + 1 }}</td>
-                                    <td><a href="#">{{item.albumName | truncate(10)}}</a></td>
+                                    <td><a :href="'/MemoryShots_photo/' + item.albumId">{{item.albumName | truncate(10)}}</a></td>
                                     <td>{{item.albumDesc | truncate(10)}}</td>
                                     <td>{{item.creatDate}}</td>
                                     <td>
@@ -139,7 +139,7 @@
                         </div>
                         <!--table-->
                         <!--PageButtom-->
-                        <div class="bg-secondary rounded p-4">
+                        <div class="bg-secondary rounded p-3">
                             <div class="btn-toolbar" role="toolbar" style="justify-content: center;">
                                 <div class="btn-group me-2" role="group" aria-label="First group">
                                     <button type="button" class="btn bts" @click="callAjax(page)"
@@ -151,7 +151,6 @@
                             </div>
                         </div>
                         <!--PageButtom-->
-
                     </div>
                     <!--vueModel-->
                 </div>
@@ -258,10 +257,6 @@
 
     <script th:href="@{/MemoryShots/static/dist/simple-lightbox.js}" src="../static/dist/simple-lightbox.js?v2.13.0"></script>
     <script th:inline="javascript">
-
-        (function() {
-            var $gallery = new SimpleLightbox('.gallery a', {});
-        })();
 
         //member_info_init
         var search_input = new Vue({
@@ -442,10 +437,6 @@
                 .catch(function (error) {
                     console.log(error);
                 });
-        }
-
-        function search(search_str){
-            console.log("search()");
         }
 
         call_ajax(1);
