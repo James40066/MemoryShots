@@ -101,18 +101,42 @@
         </nav>
         <!-- Navbar End -->
 
-        <!-- Blank Start -->
+        <!-- Blank info Start -->
         <div class="container-fluid py-4 px-4">
-            <div class="row bg-secondary rounded justify-content-center mx-0" style="min-height: 85vh !important;">
+            <!--vueModel-->
+            <div id="album_info">
+                <div class="row bg-secondary rounded mx-0 d-flex align-items-center" style="min-height: 8vh">
+                        <div class="col-5">
+                            <div class="input-group">
+                                <span class="input-group-text" >相簿名稱</span>
+                                <input type="text" id="album_name" class="form-control"
+                                       style="background-color: black;color: white;" readonly   v-model="album_name">
+                            </div>
+                        </div>
+                        <div class="col-7">
+                            <div class="input-group" style="padding-top: 16px;padding-bottom: 16px;">
+                                <span class="input-group-text">備註</span>
+                                <textarea id="album_desc" class="form-control"
+                                          style="background-color: black;color: white;" rows="1" readonly  v-model="album_desc"></textarea>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!--vueModel-->
+        </div>
+        <!-- Blank End -->
+        <!-- Blank Start -->
+        <div class="container-fluid px-4">
+            <div class="row bg-secondary rounded justify-content-center mx-0" style="min-height: 78vh !important;">
                 <!--vueModel-->
-                <div id="table_data" class="d-flex justify-content-between flex-column">
+                <div id="table_data" class="d-flex flex-column">
                     <!--table-->
                     <div class="gallery" style="margin-top: 10px;">
                         <div id="nanogallery2"></div>
                     </div>
                     <!--table-->
                     <!--PageButtom-->
-                    <div class="bg-secondary rounded p-4 d-flex align-items-end justify-content-center">
+                    <div class="bg-secondary rounded p-3 d-flex align-items-end justify-content-center">
                         <div class="btn-toolbar" role="toolbar" style="justify-content: center;">
                             <div class="btn-group me-2" role="group" aria-label="First group">
                                 <button type="button" class="btn bts" @click="callAjax(page)"
@@ -171,6 +195,29 @@
         }
     })
 
+    //album_info
+    var album_info = new Vue({
+        el: '#album_info',
+        data:{
+            album_name : '',
+            album_desc : '',
+        },created: function() {
+            var url = '/MemoryShots_photo/get_album_info/' + member_info.albumId
+            axios.get(url)
+                .then(function (response) {
+                    console.log(JSON.stringify(response));
+                    console.log("response.data.albumName=>" + response.data.albumName);
+                    console.log("response.data.albumDesc=>" + response.data.albumDesc);
+                    album_info.album_name = response.data.albumName;
+                    album_info.album_desc = response.data.albumDesc;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+        }
+    })
+
     //member_info_init
     var upload_form = new Vue({
         el: '#upload_form',
@@ -200,7 +247,7 @@
                     }
                 })
                     .then(response => {
-                        console.log(response.data);
+                        //console.log(response.data);
                         call_ajax(1);
                     })
                     .catch(error => {
@@ -251,11 +298,11 @@
         var offset = (page - 1) * 21;
         url += '&offset=' + offset;
 
-        console.log("url=>" + url);
+        //console.log("url=>" + url);
 
         axios.get(url)
             .then(function (response) {
-                console.log(JSON.stringify(response));
+                //console.log(JSON.stringify(response));
                 table.jsonData = response.data.results;
                 table.limit = response.data.limit;
                 table.offset = response.data.offset;

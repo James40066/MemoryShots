@@ -1,8 +1,10 @@
 package com.james.memoryshots.controller;
 
+import com.james.memoryshots.dto.Album;
 import com.james.memoryshots.dto.Album_photo;
 import com.james.memoryshots.dto.Album_photoQueryParams;
 import com.james.memoryshots.dto.Member;
+import com.james.memoryshots.service.MainService;
 import com.james.memoryshots.service.PhotoService;
 import com.james.memoryshots.util.Page;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,10 @@ import java.util.List;
 @Controller
 @RequestMapping("/MemoryShots_photo")
 public class PhotoController {
+
+    @Autowired
+    MainService mainService;
+
     @Autowired
     PhotoService photoService;
 
@@ -82,6 +88,19 @@ public class PhotoController {
             return ResponseEntity.status(HttpStatus.OK).body("查無資料");
         }
 
+    }
+
+    @GetMapping("/get_album_info/{albumId}")
+    public ResponseEntity<?> get_album_info(@PathVariable(required = true) int albumId) throws Exception {
+        //http://localhost:8082/MemoryShots_main/get_album_info/13
+
+        Album album = mainService.getAlbumById(albumId);
+
+        if(album != null){
+            return ResponseEntity.status(HttpStatus.OK).body(album);
+        }else{
+            return ResponseEntity.status(HttpStatus.OK).body("查無資料");
+        }
     }
 
 

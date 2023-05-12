@@ -1,12 +1,9 @@
 package com.james.memoryshots.dao.impl;
 
-import com.james.memoryshots.dao.AlbumDao;
+
 import com.james.memoryshots.dao.Album_photoDao;
-import com.james.memoryshots.dto.Album;
-import com.james.memoryshots.dto.AlbumQueryParams;
 import com.james.memoryshots.dto.Album_photo;
 import com.james.memoryshots.dto.Album_photoQueryParams;
-import com.james.memoryshots.rowmapper.AlbumRowMapper;
 import com.james.memoryshots.rowmapper.Album_photoRowMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
