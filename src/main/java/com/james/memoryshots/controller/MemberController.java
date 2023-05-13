@@ -42,7 +42,7 @@ public class MemberController {
         member.setPwd(null);
 
         if(member != null){
-            return ResponseEntity.status(HttpStatus.CREATED).body(member);
+            return ResponseEntity.status(HttpStatus.OK).body(member);
         }else{
             return ResponseEntity.status(HttpStatus.OK).body("查無資料");
         }
@@ -51,6 +51,7 @@ public class MemberController {
     @PutMapping("/update_ember/{memberId}")
     public ResponseEntity<?> update_album(@RequestBody @Valid Member member, @PathVariable int memberId) throws Exception {
         //http://localhost:8082/update_ember/6
+        //{"name":"james40066","email":"a123456789@gmail.com","pwd":"jay0814"}
 
         Member dbmember = signinService.getMemberById(memberId);
 

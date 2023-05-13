@@ -54,9 +54,6 @@ public class AlbumDaoImpl implements AlbumDao {
             sql += " AND (album_name LIKE '%" + albumQueryParams.getSearch() + "%' OR album_desc Like '%" + albumQueryParams.getSearch() + "%')";
         }
 
-        //sort條件
-        sql += " ORDER BY album_id DESC";
-
         log.warn("countAlbumList_sql=>" + sql);
 
         map.put("memberId",albumQueryParams.getMemberId());

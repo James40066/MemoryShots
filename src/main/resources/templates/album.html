@@ -429,7 +429,7 @@
         function del_album(albumId){
             var url = '/MemoryShots_main/del_album/' + albumId;
             //console.log("url=>" + url);
-            axios.get(url)
+            axios.delete(url)
                 .then(function (response) {
                     //console.log(JSON.stringify(response));
                     call_ajax(1);

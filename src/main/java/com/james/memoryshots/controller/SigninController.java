@@ -46,8 +46,8 @@ public class SigninController {
 
     @PostMapping("/doSignIn")
     public ResponseEntity<?> doLogin(@RequestBody @Valid MemberRequest memberRequest , HttpSession session) throws Exception {
-        //http://localhost:8082/doSignIn
-        //{"email":"a0953782057@gmail.com","pwd":"jay0519"}
+        //http://localhost:8082/MemoryShots/doSignIn
+        //{"email":"a123456789@gmail.com","pwd":"jay0814"}
 
         log.warn("EMAIL=>" + memberRequest.getEmail());
         log.warn("PWD=>" + memberRequest.getPwd());

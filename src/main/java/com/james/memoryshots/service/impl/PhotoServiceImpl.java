@@ -28,7 +28,7 @@ public class PhotoServiceImpl implements PhotoService {
     ResourceLoader resourceLoader;
 
     @Override
-    public void insert(String albumId, MultipartFile file) throws Exception {
+    public boolean insert(String albumId, MultipartFile file) throws Exception {
 
         if (!file.getContentType().equals("image/jpeg")) {
             throw new IllegalArgumentException("只允許上傳JPG格式");
@@ -69,6 +69,7 @@ public class PhotoServiceImpl implements PhotoService {
         log.warn("新增相簿id=>" + a.getAlbumId());
         log.warn("新增照片名稱=>" + a.getFileName());
 
+        return true;
     }
 
     @Override

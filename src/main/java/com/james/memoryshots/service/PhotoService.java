@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface PhotoService {
 
-    void insert(String albumId, MultipartFile file) throws Exception;
+    boolean insert(String albumId, MultipartFile file) throws Exception;
 
     List<Album_photo> getAlbum_photoByAlbumId(Album_photoQueryParams albumPhotoQueryParams) throws Exception;
 

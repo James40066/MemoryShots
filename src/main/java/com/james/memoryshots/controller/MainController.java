@@ -52,14 +52,14 @@ public class MainController {
         }
     }
 
-    @GetMapping("/del_album/{albumId}")
+    @DeleteMapping("/del_album/{albumId}")
     public ResponseEntity<?> del_album(@PathVariable int albumId) throws Exception {
         //http://localhost:8082/del_album/6
 
         boolean status = mainService.delete(albumId);
 
         if(status){
-            return ResponseEntity.status(HttpStatus.CREATED).body("刪除成功");
+            return ResponseEntity.status(HttpStatus.OK).body("刪除成功");
         }else{
             return ResponseEntity.status(HttpStatus.OK).body("刪除失敗");
         }
