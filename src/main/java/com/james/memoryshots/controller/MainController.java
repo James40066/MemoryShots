@@ -6,12 +6,15 @@ import com.james.memoryshots.dto.AlbumRequest;
 import com.james.memoryshots.dto.Member;
 import com.james.memoryshots.service.MainService;
 import com.james.memoryshots.util.Page;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -26,6 +29,7 @@ public class MainController {
     MainService mainService;
 
     @GetMapping("/")
+    @ApiIgnore
     public String index(HttpSession session, Model model){
         Member member = (Member)session.getAttribute("member");
         if(member == null){
@@ -39,7 +43,11 @@ public class MainController {
     }
 
     @PostMapping("/creat_album/{memberId}")
-    public ResponseEntity<?> creat_album(@RequestBody @Valid AlbumRequest albumRequest,@PathVariable String memberId) throws Exception {
+    @ApiOperation("進行相簿新增")
+    public ResponseEntity<?> creat_album(
+            @ApiParam(required = true, value = "相簿資料") @RequestBody @Valid AlbumRequest albumRequest,
+            @ApiParam(required = true, value = "會員ID") @PathVariable String memberId
+    ) throws Exception {
         //http://localhost:8082/creat_album/6
         //{"albumName":"大阪自由行8","albumDesc":"2023/03/02"}
 
@@ -53,7 +61,10 @@ public class MainController {
     }
 
     @DeleteMapping("/del_album/{albumId}")
-    public ResponseEntity<?> del_album(@PathVariable int albumId) throws Exception {
+    @ApiOperation("進行相簿刪除")
+    public ResponseEntity<?> del_album(
+            @ApiParam(required = true, value = "相簿ID") @PathVariable int albumId
+    ) throws Exception {
         //http://localhost:8082/del_album/6
 
         boolean status = mainService.delete(albumId);
@@ -66,7 +77,11 @@ public class MainController {
     }
 
     @PutMapping("/update_album/{albumId}")
-    public ResponseEntity<?> update_album(@RequestBody @Valid AlbumRequest albumRequest,@PathVariable int albumId) throws Exception {
+    @ApiOperation("進行相簿更新")
+    public ResponseEntity<?> update_album(
+            @ApiParam(required = true, value = "相簿資料") @RequestBody @Valid AlbumRequest albumRequest,
+            @ApiParam(required = true, value = "相簿ID") @PathVariable int albumId
+    ) throws Exception {
         //http://localhost:8082/update_album/6
         //{"albumName":"大阪自由行8","albumDesc":"2023/03/02"}
 
@@ -80,11 +95,13 @@ public class MainController {
     }
 
     @GetMapping("/find_album")
-    public ResponseEntity<?> find_album(@RequestParam(required = true) String memberId,
-                                        @RequestParam(defaultValue = "10") @Max(10) @Min(0) int limit,
-                                        @RequestParam(defaultValue = "0") @Min(0) int offset,
-                                        @RequestParam(required = false) String search
-                                                                    ) throws Exception {
+    @ApiOperation("透過memberId查詢相簿")
+    public ResponseEntity<?> find_album(
+            @ApiParam(required = true, value = "會員ID") @RequestParam(required = true) String memberId,
+            @ApiParam(value = "資料最大比數") @RequestParam(defaultValue = "10") @Max(10) @Min(0) int limit,
+            @ApiParam(value = "offset") @RequestParam(defaultValue = "0") @Min(0) int offset,
+            @ApiParam(value = "查詢關鍵字") @RequestParam(required = false) String search
+    ) throws Exception {
         //http://localhost:8082/MemoryShots_main/find_album?memberId=6&offset=10
         //http://localhost:8082/MemoryShots_main/find_album?memberId=6&offset=10&search=05/11
         AlbumQueryParams albumQueryParams = new AlbumQueryParams();

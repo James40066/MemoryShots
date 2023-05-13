@@ -1,12 +1,16 @@
 package com.james.memoryshots.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 public class AlbumRequest {
     @NotNull
+    @ApiModelProperty(value = "相簿名稱", required = true)
     String albumName;
 
+    @ApiModelProperty(value = "相簿備註")
     String albumDesc;
 
     public String getAlbumName() {

@@ -3,6 +3,8 @@ package com.james.memoryshots.controller;
 import com.james.memoryshots.dto.AlbumRequest;
 import com.james.memoryshots.dto.Member;
 import com.james.memoryshots.service.SigninService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -22,6 +25,7 @@ public class MemberController {
     SigninService signinService;
 
     @GetMapping("/")
+    @ApiIgnore
     public String index(HttpSession session, Model model){
         Member member = (Member)session.getAttribute("member");
         if(member == null){
@@ -35,7 +39,10 @@ public class MemberController {
     }
 
     @GetMapping("/get_member/{memberId}")
-    public ResponseEntity<?> get_member(@PathVariable int memberId) throws Exception {
+    @ApiOperation("取得會員資料")
+    public ResponseEntity<?> get_member(
+            @ApiParam(required = true, value = "會員ID") @PathVariable int memberId
+    ) throws Exception {
         //http://localhost:8082/MemoryShots_member/get_member/6
 
         Member member = signinService.getMemberById(memberId);
@@ -49,7 +56,11 @@ public class MemberController {
     }
 
     @PutMapping("/update_ember/{memberId}")
-    public ResponseEntity<?> update_album(@RequestBody @Valid Member member, @PathVariable int memberId) throws Exception {
+    @ApiOperation("更新會員資料")
+    public ResponseEntity<?> update_album(
+            @ApiParam(required = true, value = "會員資料") @RequestBody @Valid Member member,
+            @ApiParam(required = true, value = "會員ID") @PathVariable int memberId
+    ) throws Exception {
         //http://localhost:8082/update_ember/6
         //{"name":"james40066","email":"a123456789@gmail.com","pwd":"jay0814"}
 

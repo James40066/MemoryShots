@@ -1,5 +1,7 @@
 package com.james.memoryshots.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -15,14 +17,17 @@ public class Member {
    @Column(name = "email")
    @NotNull
    @Email
+   @ApiModelProperty(value = "電子信箱")
    String email;
 
    @Column(name = "pwd")
    @NotNull
+   @ApiModelProperty(value = "密碼", required = true)
    String pwd;
 
    @Column(name = "name")
    @NotNull
+   @ApiModelProperty(value = "會員名稱")
    String name;
 
    public int getMemberId() {
