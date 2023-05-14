@@ -73,7 +73,7 @@ public class PhotoController {
     @ApiOperation("取得相簿中所有相片資料")
     public ResponseEntity<?> getAlbum(
             @ApiParam(required = true, value = "相簿ID") @RequestParam(required = true) int albumId,
-            @ApiParam(value = "資料最大比數") @RequestParam(defaultValue = "21") @Max(10) @Min(0) int limit,
+            @ApiParam(value = "資料最大比數") @RequestParam(defaultValue = "24") @Max(10) @Min(0) int limit,
             @ApiParam(value = "offset") @RequestParam(defaultValue = "0") @Min(0) int offset
     ) throws Exception{
         //http://localhost:8082/MemoryShots_photo/getAlbum?albumId=13&offset=0

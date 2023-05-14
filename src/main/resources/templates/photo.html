@@ -268,6 +268,7 @@
                     })
                     .catch(error => {
                         console.error(error);
+                        alert('總上傳檔案大小過大!!');
                     });
             }
         }
@@ -301,8 +302,8 @@
     function initNanoGallery(items) {
         nanoGalleryInstance  = $("#nanogallery2").nanogallery2({
             itemsBaseURL: '../static/album/' + member_info.albumId + '/',
-            thumbnailWidth: 200,
-            thumbnailHeight: 200,
+            thumbnailWidth: 150,
+            thumbnailHeight: 150,
             items: items
         });
     }
@@ -311,7 +312,7 @@
         var url = '/MemoryShots_photo/getAlbum?albumId=' + member_info.albumId;
 
         //offset
-        var offset = (page - 1) * 21;
+        var offset = (page - 1) * 24;
         url += '&offset=' + offset;
 
         //console.log("url=>" + url);

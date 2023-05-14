@@ -143,8 +143,8 @@
                                 <tbody>
                                 <tr v-for="(item, index) in jsonData" :key="item.albumId">
                                     <td>{{index + 1 }}</td>
-                                    <td><a :href="'/MemoryShots_photo/' + item.albumId">{{item.albumName | truncate(10)}}</a></td>
-                                    <td>{{item.albumDesc | truncate(10)}}</td>
+                                    <td><a :href="'/MemoryShots_photo/' + item.albumId">{{item.albumName | truncate(15)}}</a></td>
+                                    <td>{{item.albumDesc | truncate(15)}}</td>
                                     <td>{{item.creatDate}}</td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-sm" @click="editAlbum(item)" data-bs-toggle="modal" data-bs-target="#updateModal">修改</button>
